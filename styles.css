@@ -1,0 +1,125 @@
+canvas {
+  display: block;
+}
+
+#emgDash .container,
+.container-fluid,
+.container-xxl,
+.container-xl,
+.container-lg,
+.container-md,
+.container-sm {
+  padding: 0;
+  max-width: 1280px;
+  min-width: 1280px;
+}
+
+#EMGPlacementView {
+  height: 360px;
+  width: 320px;
+  position: absolute;
+  top: 0px;
+  left: 640px;
+  background-image: url("images/emgPlacement/02.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+#EMGProcessingVis {
+  height: 1024px;
+  width: 768px;
+  position: absolute;
+  top: 768px;
+  left: 0px;
+
+}
+
+#poseInstructionView {
+  height: 360px;
+  width: 320px;
+  position: absolute;
+  top: 0px;
+  left: 960px;
+  /* background-color: yellow; */
+}
+
+#poseInstructionText {
+  height: 130px;
+  font-size: 10pt;
+  padding: 8px;
+}
+
+#poseInstructionImage {
+  height: 230px;
+  background-image: url("images/yogaPose/bikram03.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.testbg {
+  background-color: red;
+}
+
+#webCamView {
+  height: 768px;
+  width: 1024px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+#emgDash video {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+/* CUSTOM DROPDOWN BUTTON */
+/* Dropdown Button */
+.customDropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 6px;
+  font-size: 12px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.customDropbtn:hover, .customDropbtn:focus {
+  background-color: #2980B9;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.customDropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.customDropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.customDropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.customDropdown-content a:hover {
+  background-color: #ddd
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.customShow {
+  display: block;
+}
