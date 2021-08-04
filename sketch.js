@@ -1,5 +1,9 @@
 // sketch 1 on canvas 1 for web camera view
 
+
+
+
+
 const CamViewSketch = (sketch1) => {
   let capture;
   let globalStep = 0;
