@@ -1,5 +1,4 @@
 // sketch 1 on canvas 1 for web camera view
-dfdfajklfdjaklfjl
 
 
 
@@ -9,6 +8,12 @@ const CamViewSketch = (sketch1) => {
   let globalStep = 0;
   let posesD = [];
   let minPoseConfidence = 0.01;
+  let n = 1000;
+  let x = [];
+  let y = [];
+  let dx = [];
+  let dy = [];
+
   sketch1.setup = () => {
     sketch1.createCanvas(1024, 768);
     capture = sketch1.createCapture(sketch1.VIDEO);
@@ -39,6 +44,24 @@ const CamViewSketch = (sketch1) => {
     }
   }
 
+  function testAnimation() {
+    // globalStep = constant
+    // t variable
+    // test animation
+    let yFrequency = 2000;
+    let yAmp = 20;
+    let yNoiseAmp = 50;
+    let ddy = 0;
+    for (let t = 0; t < n; t++) {
+      x[21] = 500 + sketch1.cos(t * 0.05) * 60 * sketch1.map(t, 0, n, 1, 0.5);
+      y[21] = sketch1.sin(t * 0.05) * 20 + sketch1.map(t, 0, n, 300, 600);
+      dx[21] = x[21];
+      ddy = sketch1.sin(t * globalStep / (sketch1.map(t, 0, n, 0.05, 10) * yFrequency)) * yAmp * sketch1.noise(yNoiseAmp * t);
+      dy[21] = y[21] + ddy;
+      sketch1.ellipse(dx[21], dy[21], 1, 1);
+    }
+  }
+
 
   function drawBody(sketch1, pose) {
     sketch1.fill(255, 0, 0);
@@ -46,38 +69,38 @@ const CamViewSketch = (sketch1) => {
 
     sketch1.ellipse(pose.nose.x, pose.nose.y, 30);
     sketch1.ellipse(pose.nose.x, pose.nose.y, 30);
-    let n = 3000;
-    let x = [];
-    let y = [];
-    let dx = [];
-    let dy = [];
-    for (let t = 0; t < n; t++) {
 
-      //from nose to right ankle
-      if (pose.nose.confidence >= minPoseConfidence && pose.rightAnkle.confidence >= minPoseConfidence) {
-        x[0] = sketch1.cos(t * 0.05) * 60 * sketch1.map(t, 0, n, 1, 0.3) + sketch1.map(t, 0, n, pose.nose.x, pose.rightAnkle.x);
-        y[0] = sketch1.sin(t * 0.05) * 20 + sketch1.map(t, 0, n, pose.nose.y, pose.rightAnkle.y);
-        sketch1.fill(255);
-        dx[0] = x[0] + sketch1.noise(0.05 * globalStep + sketch1.sin(0.05 * t)) * 30;
-        dy[0] = y[0] + sketch1.noise(0.05 * globalStep + sketch1.sin(0.05 * t)) * 30;
-        sketch1.ellipse(dx[0], dy[0], 1, 1);
-      }
-
-      if (pose.nose.confidence >= minPoseConfidence && pose.leftAnkle.confidence >= minPoseConfidence) {
-        //from nose to left ankle
-        x[1] = sketch1.cos(t * 0.05) * 60 * sketch1.map(t, 0, n, 1, 0.3) + sketch1.map(t, 0, n, pose.nose.x, pose.leftAnkle.x);
-        y[1] = sketch1.sin(t * 0.05) * 20 + sketch1.map(t, 0, n, pose.nose.y, pose.leftAnkle.y);
-        sketch1.fill(255);
-        dx[1] = x[1] + sketch1.noise(0.05 * globalStep + sketch1.sin(0.05 * t)) * 15;
-        dy[1] = y[1] + sketch1.noise(0.05 * globalStep + sketch1.sin(0.05 * t)) * 15;
-        sketch1.ellipse(dx[1], dy[1], 1, 1);
-      }
+    // for (let t = 0; t < n; t++) {
 
 
 
 
 
-    }
+    //from nose to right ankle
+    // if (pose.nose.confidence >= minPoseConfidence && pose.rightAnkle.confidence >= minPoseConfidence) {
+    //   x[0] = sketch1.cos(t * 0.05) * 60 * sketch1.map(t, 0, n, 1, 0.3) + sketch1.map(t, 0, n, pose.nose.x, pose.rightAnkle.x);
+    //   y[0] = sketch1.sin(t * 0.05) * 20 + sketch1.map(t, 0, n, pose.nose.y, pose.rightAnkle.y);
+    //   sketch1.fill(255);
+    //   dx[0] = x[0];
+    //   dy[0] = y[0] + sketch1.noise(5 * globalStep) * 30;
+    //   sketch1.ellipse(dx[0], dy[0], 1, 1);
+    // }
+
+    // if (pose.nose.confidence >= minPoseConfidence && pose.leftAnkle.confidence >= minPoseConfidence) {
+    //   //from nose to left ankle
+    //   x[1] = sketch1.cos(t * 0.05) * 60 * sketch1.map(t, 0, n, 1, 0.3) + sketch1.map(t, 0, n, pose.nose.x, pose.leftAnkle.x);
+    //   y[1] = sketch1.sin(t * 0.05) * 20 + sketch1.map(t, 0, n, pose.nose.y, pose.leftAnkle.y);
+    //   sketch1.fill(255);
+    //   dx[1] = x[1] + sketch1.noise(0.05 * globalStep + sketch1.sin(0.05 * t)) * 15;
+    //   dy[1] = y[1] + sketch1.noise(0.05 * globalStep + sketch1.sin(0.05 * t)) * 15;
+    //   sketch1.ellipse(dx[1], dy[1], 1, 1);
+    // }
+    //
+    //
+
+
+
+    // }
   }
 
 
@@ -87,6 +110,8 @@ const CamViewSketch = (sketch1) => {
     sketch1.background(0);
     sketch1.stroke(255);
     globalStep++;
+
+    testAnimation();
 
     for (let t = 0; t < Math.min(2, posesD.length); t++) {
       if (posesD[t].score >= minPoseConfidence) {
