@@ -25,6 +25,16 @@ canvas {
   background-size: 100% 100%;
 }
 
+
+#sensorValueDisplay {
+  height: 360px;
+  width: 320px;
+  position: absolute;
+  top: 0px;
+  left: 1024px;
+
+}
+
 #EMGProcessingVis {
   height: 1024px;
   width: 768px;
